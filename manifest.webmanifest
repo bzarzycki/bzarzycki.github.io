@@ -1,0 +1,13 @@
+{
+    "name": "Kreator listy zakupów",
+    "short_name": "Lista zakupów",
+    "lang": "pl",
+    "description": "Aplikacja umożliwia tworzenie list zakupów i zarządzanie nimi.",
+    "display": "fullscreen",
+    "icons": [
+        {
+          "src": "favicon-196x196.png",
+          "sizes": "48x48"
+        }
+    ]
+}
