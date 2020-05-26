@@ -4,6 +4,9 @@
     "lang": "pl",
     "description": "Aplikacja umożliwia tworzenie list zakupów i zarządzanie nimi.",
     "display": "standalone",
+    "start_url": "/index.html",
+    "background_color": "#020",
+    "theme_color": "#272",
     "icons": [
         {
           "src": "favicon-196x196.png",
