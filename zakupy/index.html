@@ -10,37 +10,6 @@
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>
-        /* body {
-            Background-color: #020;
-            color: white;
-            font-family: monospace;
-        }
-
-        button {
-            border: 1px solid #040;
-            color: white;
-            background: #030;
-            padding: 0.5em;
-        }
-
-        input,
-        select {
-            background: #010;
-            color: white;
-            border: 1px solid #050;
-            padding: 0.5em;
-        }
-
-        .row {
-            display: table-row;
-        }
-
-        .col {
-            display: table-cell;
-            padding: 0.5em;
-        } */
-    </style>
     <script src="app.js"></script>
 </head>
 
@@ -59,30 +28,21 @@
             </div>
         </div>
     </nav>
-    <div class="container">
+    <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-bottom">
+        <form class="form-inline">
+            <select class="form-control mr-2" id="select1"></select>
+            <input class="form-control mr-2" type="text" id="productName" value="" placeholder="Nazwa produktu" />
+            <input class="form-control mr-2" type="text" id="productAmount" value="" placeholder="Ilość / Waga" />
+            <button class="btn btn-outline-primary" id="addProduct">Dodaj</button>
+        </form>
+    </nav>
+    <div class="container-fluid">
         <div class="row mt-5 pt-3">
             <div class="col-8">
                 <input type="file" class="form-control-file" id="file-selector" accept=".zakupy" />
             </div>
             <div class="col-4">
                 <button class="btn btn-light" onclick="loadFromFile()">Wczytaj z pliku</button>
-            </div>
-        </div>
-        <div class="form-row mt-3">
-            <div class="col">
-                <input class="form-control" type="text" id="productName" value="" placeholder="Nazwa produktu" />
-            </div>
-        </div>
-        <div class="form-row mt-2">
-            <div class="col-4">
-                <select class="form-control" id="select1"></select>
-            </div>
-            <div class="col-4">
-                <input class="form-control" type="text" id="productAmount" value="" placeholder="Ilość / Waga" />
-            </div>
-            <div class="col-4">
-                <button class="btn btn-primary btn-block" id="addProduct"><i class="fa fa-plus" aria-hidden="true"></i>
-                    Dodaj</button>
             </div>
         </div>
     </div>
