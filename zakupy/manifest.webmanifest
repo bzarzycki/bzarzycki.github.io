@@ -5,8 +5,8 @@
     "description": "Aplikacja umożliwia tworzenie list zakupów i zarządzanie nimi.",
     "display": "standalone",
     "start_url": "/zakupy",
-    "background_color": "#020",
-    "theme_color": "#272",
+    "background_color": "#DDD",
+    "theme_color": "#CCC",
     "orientation": "portrait",
     "icons": [
         {

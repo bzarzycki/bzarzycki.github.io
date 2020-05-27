@@ -86,7 +86,7 @@ function renderProductList() {
         col.colSpan = 5;
         groups[group].forEach(function (item) {
             var row = shoppingListTable.insertRow();
-            row.insertCell(0).innerHTML = "<button onclick='mark(\"" + item.id + "\")'>&check;</button>";
+            row.insertCell(0).innerHTML = "<button class=\"btn btn-outline-secondary\" onclick='mark(\"" + item.id + "\")'><i class=\"fa fa-check\"></i></button>";
             if (item.checked) {
                 row.insertCell(1).innerHTML = '<span style="text-decoration:line-through">' + item.name + '</span>';
             }
@@ -94,8 +94,8 @@ function renderProductList() {
                 row.insertCell(1).innerHTML = item.name;
             }
             row.insertCell(2).innerHTML = item.amount;
-            row.insertCell(3).innerHTML = "<button onclick='edit(\"" + item.id + "\")'>&nearhk;</button>";
-            row.insertCell(4).innerHTML = "<button onclick='remove(\"" + item.id + "\")'>&cross;</button>";
+            row.insertCell(3).innerHTML = "<button class=\"btn btn-outline-secondary\" onclick='edit(\"" + item.id + "\")'><i class=\"fa fa-pencil\"></i></button>";
+            row.insertCell(4).innerHTML = "<button class=\"btn btn-outline-secondary\" onclick='remove(\"" + item.id + "\")'><i class=\"fa fa-times\"></i></button>";
         });
     }
 }
