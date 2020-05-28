@@ -11,7 +11,7 @@ var App = (function () {
     return App;
 }());
 var selectedProductList = [];
-var shoppingListTable;
+var shoppingListElement;
 var productName;
 var productAmount;
 var categorySelect;
@@ -24,10 +24,10 @@ function loadFromFile() {
     };
     reader.readAsText(file);
 }
-function save() {
+function saveListToStorage() {
     localStorage.setItem("list", JSON.stringify(selectedProductList));
 }
-function load() {
+function loadListFromStorage() {
     selectedProductList = JSON.parse(localStorage.getItem("list"));
     renderProductList();
 }
@@ -40,21 +40,25 @@ function mark(id) {
     });
     renderProductList();
 }
+function removeProductFromList() {
+    var productForm = document.getElementById('add-product-form');
+    var id = productForm.getAttribute('data-selected-id');
+    selectedProductList = selectedProductList.filter(function (product) { return product.id !== id; });
+    productForm.removeAttribute('data-selected-id');
+    renderProductList();
+}
 function remove(id) {
     selectedProductList = selectedProductList.filter(function (product) { return product.id !== id; });
     renderProductList();
 }
 function edit(id) {
-    selectedProductList = selectedProductList.filter(function (product) {
-        if (product.id === id) {
-            productName.value = product.name;
-            productAmount.value = product.amount;
-            categorySelect.value = product.category;
-            return false;
-        }
-        return true;
-    });
-    renderProductList();
+    var product = selectedProductList.filter(function (p) { return p.id === id; })[0];
+    productName.value = product.name;
+    productAmount.value = product.amount;
+    categorySelect.value = product.category;
+    var productForm = document.getElementById('add-product-form');
+    productForm.classList.remove('d-none');
+    productForm.setAttribute('data-selected-id', id);
 }
 function groupProductsByCategory(products) {
     return products.reduce(function (group, obj) {
@@ -67,37 +71,31 @@ function groupProductsByCategory(products) {
     }, {});
 }
 function renderProductList() {
-    if (shoppingListTable) {
-        shoppingListTable.remove();
+    if (shoppingListElement) {
+        shoppingListElement.remove();
     }
-    shoppingListTable = document.createElement("table");
-    shoppingListTable.id = "shoppingListTable";
-    shoppingListTable.style.width = "100%";
-    document.body.appendChild(shoppingListTable);
+    shoppingListElement = document.createElement("div");
+    shoppingListElement.id = "shoppingListTable";
+    shoppingListElement.className = "list-group mt-3";
+    document.body.appendChild(shoppingListElement);
     var groups = groupProductsByCategory(selectedProductList);
     for (var group in groups) {
-        var row = shoppingListTable.insertRow();
-        var col = row.insertCell(0);
-        col.innerHTML = group;
-        col.style.borderBottom = "1px dashed";
-        col.style.paddingTop = "1em";
-        col.style.fontWeight = "bold";
-        col.style.opacity = "0.5";
-        col.colSpan = 5;
+        var listHeader = document.createElement("div");
+        listHeader.className = "list-group-item list-group-item-secondary font-weight-bold";
+        listHeader.innerText = group;
+        shoppingListElement.appendChild(listHeader);
         groups[group].forEach(function (item) {
-            var row = shoppingListTable.insertRow();
-            row.insertCell(0).innerHTML = "<button class=\"btn btn-outline-secondary\" onclick='mark(\"" + item.id + "\")'><i class=\"fa fa-check\"></i></button>";
-            if (item.checked) {
-                row.insertCell(1).innerHTML = '<span style="text-decoration:line-through">' + item.name + '</span>';
-            }
-            else {
-                row.insertCell(1).innerHTML = item.name;
-            }
-            row.insertCell(2).innerHTML = item.amount;
-            row.insertCell(3).innerHTML = "<button class=\"btn btn-outline-secondary\" onclick='edit(\"" + item.id + "\")'><i class=\"fa fa-pencil\"></i></button>";
-            row.insertCell(4).innerHTML = "<button class=\"btn btn-outline-secondary\" onclick='remove(\"" + item.id + "\")'><i class=\"fa fa-times\"></i></button>";
+            var listItem = document.createElement("div");
+            listItem.className = "list-group-item";
+            var html = "<button class=\"btn btn-dark btn-sm mr-3\" onclick='mark(\"" + item.id + "\")'><i class=\"fa fa-check\"></i></button>";
+            html += item.name;
+            html += "<span class=\"badge badge-light ml-3\">" + item.amount + "</span>";
+            html += "<button class=\"btn btn-dark float-right btn-sm\" onclick='edit(\"" + item.id + "\")'><i class=\"fa fa-pencil\"></i></button>";
+            listItem.innerHTML += html;
+            shoppingListElement.appendChild(listItem);
         });
     }
+    saveListToStorage();
 }
 window.onload = function () {
     var app = new App();
@@ -105,6 +103,7 @@ window.onload = function () {
     productName = document.getElementById("productName");
     productAmount = document.getElementById("productAmount");
     var addProductBtn = document.getElementById("addProduct");
+    loadListFromStorage();
     CATEGORIES.forEach(function (item) {
         var option = document.createElement("option");
         option.innerText = item;
@@ -112,8 +111,15 @@ window.onload = function () {
         categorySelect.appendChild(option);
     });
     addProductBtn.onclick = function () {
+        var productForm = document.getElementById('add-product-form');
+        var selectedId = productForm.getAttribute('data-selected-id');
+        if (selectedId) {
+            removeProductFromList();
+            productForm.removeAttribute('data-selected-id');
+            productForm.classList.add('d-none');
+        }
         var selectedProduct = {
-            id: app.generateId(),
+            id: selectedId ? selectedId : app.generateId(),
             category: categorySelect.options[categorySelect.selectedIndex].text,
             name: productName.value,
             checked: false,
@@ -124,6 +130,5 @@ window.onload = function () {
         productName.value = "";
         productAmount.value = "";
     };
-    categorySelect.dispatchEvent(new Event('change'));
 };
 var CATEGORIES = ["Warzywa", "Owoce", "Nabiał", "Śniadaniowe", "Mięso", "Słodycze", "Napoje", "Chemia", "Różne"];
