@@ -16,35 +16,48 @@
 <body>
     <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
         <a class="navbar-brand" href="#">Lista zakupów</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto"></ul>
-            <div>
-                <button class="btn btn-outline-secondary mr-2" onclick="load()">Wczytaj</button>
-                <button class="btn btn-outline-secondary" onclick="save()">Zapisz</button>
-            </div>
-        </div>
+        <button class="btn btn-primary" data-toggle="button" onclick="$('#add-product-form').toggleClass('d-none');"><i
+                class="fa fa-edit"></i>
+            Produkt</button>
+        <button class="btn btn-secondary" data-toggle="button" onclick="$('#data-form').toggleClass('d-none');"><i
+                class="fa fa-server"></i> Dane</button>
     </nav>
-    <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-bottom">
-        <form class="form-inline">
-            <select class="form-control mr-2" id="select1"></select>
-            <input class="form-control mr-2" type="text" id="productName" value="" placeholder="Nazwa produktu" />
-            <input class="form-control mr-2" type="text" id="productAmount" value="" placeholder="Ilość / Waga" />
-            <button class="btn btn-outline-primary" id="addProduct">Dodaj</button>
+    <div class="container-fluid fixed-bottom bg-light">
+        <form id="add-product-form" class="d-none">
+            <div class="form-row mt-2">
+                <div class="col">
+                    <select class="form-control" id="select1"></select>
+                </div>
+                <div class="col">
+                    <input class="form-control" type="text" id="productName" value="" placeholder="Nazwa produktu" />
+                </div>
+            </div>
+            <div class="form-row mt-2 mb-2">
+                <div class="col">
+                    <input class="form-control" type="text" id="productAmount" value="" placeholder="Ilość / Waga" />
+                </div>
+                <div class="col">
+                    <button class="btn btn-outline-primary btn-block" id="addProduct"><i class="fa fa-plus"></i>
+                        Dodaj</button>
+                </div>
+            </div>
         </form>
-    </nav>
-    <div class="container-fluid">
-        <div class="row mt-5 pt-3">
-            <div class="col-8">
-                <input type="file" class="form-control-file" id="file-selector" accept=".zakupy" />
+        <form id="data-form" class="d-none">
+            <div class="form-row mt-2">
+                <div class="col">
+                    <button class="btn btn-outline-secondary mr-2" onclick="load()">Wczytaj</button>
+                    <button class="btn btn-outline-secondary" onclick="save()">Zapisz</button>
+                </div>
             </div>
-            <div class="col-4">
-                <button class="btn btn-light" onclick="loadFromFile()">Wczytaj z pliku</button>
+            <div class="form-row mt-2 mb-2">
+                <div class="col-8">
+                    <input type="file" class="form-control-file" id="file-selector" accept=".zakupy" />
+                </div>
+                <div class="col-4">
+                    <button class="btn btn-outline-secondary" onclick="loadFromFile()">Wczytaj z pliku</button>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
