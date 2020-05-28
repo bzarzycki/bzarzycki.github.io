@@ -87,7 +87,11 @@ function renderProductList() {
         groups[group].forEach(function (item) {
             var listItem = document.createElement("div");
             listItem.className = "list-group-item";
-            var html = "<button class=\"btn btn-dark btn-sm mr-3\" onclick='mark(\"" + item.id + "\")'><i class=\"fa fa-check\"></i></button>";
+            if (item.checked) {
+                listItem.classList.add('bg-success');
+            }
+            var btnIconClass = item.checked ? 'fa fa-check-square-o' : 'fa-square-o';
+            var html = "<button class=\"btn btn-dark btn-sm mr-3\" onclick='mark(\"" + item.id + ("\")'><i class=\"fa " + btnIconClass + "\"></i></button>");
             html += item.name;
             html += "<span class=\"badge badge-light ml-3\">" + item.amount + "</span>";
             html += "<button class=\"btn btn-dark float-right btn-sm\" onclick='edit(\"" + item.id + "\")'><i class=\"fa fa-pencil\"></i></button>";
