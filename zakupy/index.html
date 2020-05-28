@@ -19,8 +19,8 @@
         <button class="btn btn-primary mr-1" data-toggle="button"
             onclick="$('#add-product-form').toggleClass('d-none');"><i class="fa fa-edit"></i>
             Produkt</button>
-        <button class="btn btn-secondary" data-toggle="button" onclick="$('#data-form').toggleClass('d-none');"><i
-                class="fa fa-server"></i> Dane</button>
+        <button class="btn btn-dark" data-toggle="button" onclick="$('#data-form').toggleClass('d-none');"><i
+                class="fa fa-server"></i></button>
     </nav>
     <div class="container-fluid fixed-bottom bg-light d-none" id="add-product-form">
         <div class="form-row mt-2">
@@ -44,8 +44,8 @@
     <div class="container-fluid fixed-bottom bg-warning d-none" id="data-form">
         <div class="form-row mt-2">
             <div class="col">
-                <button class="btn btn-outline-secondary mr-2" onclick="load()">Wczytaj</button>
-                <button class="btn btn-outline-secondary" onclick="save()">Zapisz</button>
+                <button class="btn btn-dark mr-2" onclick="load()">Wczytaj</button>
+                <button class="btn btn-dark" onclick="save()">Zapisz</button>
             </div>
         </div>
         <div class="form-row mt-2 mb-2">
@@ -53,7 +53,7 @@
                 <input type="file" class="form-control-file" id="file-selector" accept=".zakupy" />
             </div>
             <div class="col-4">
-                <button class="btn btn-outline-secondary" onclick="loadFromFile()">Wczytaj z pliku</button>
+                <button class="btn btn-dark" onclick="loadFromFile()">Wczytaj z pliku</button>
             </div>
         </div>
     </div>

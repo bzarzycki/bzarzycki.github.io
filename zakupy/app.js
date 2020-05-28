@@ -73,7 +73,7 @@ function renderProductList() {
     shoppingListTable = document.createElement("table");
     shoppingListTable.id = "shoppingListTable";
     shoppingListTable.style.width = "100%";
-    document.getElementById("shopping-list").appendChild(shoppingListTable);
+    document.body.appendChild(shoppingListTable);
     var groups = groupProductsByCategory(selectedProductList);
     for (var group in groups) {
         var row = shoppingListTable.insertRow();
