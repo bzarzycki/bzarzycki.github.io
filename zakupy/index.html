@@ -17,7 +17,7 @@
     <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
         <a class="navbar-brand" href="#">Lista zakupów</a>
         <button class="btn btn-primary mr-1" data-toggle="button"
-            onclick="$('#add-product-form').toggleClass('d-none');"><i class="fa fa-edit"></i>
+            onclick="showAddProductForm()"><i class="fa fa-edit"></i>
             Produkt</button>
         <button class="btn btn-dark" data-toggle="button" onclick="$('#data-form').toggleClass('d-none');"><i
                 class="fa fa-server"></i></button>
@@ -42,7 +42,7 @@
                     Dodaj</button>
             </div>
             <div class="col">
-                <button class="btn btn-danger btn-sm btn-block" onclick="removeProductFromList()"><i class="fa fa-minus"></i>
+                <button class="btn btn-danger btn-sm btn-block d-none" id="removeProduct" onclick="removeProductFromList()"><i class="fa fa-minus"></i>
                     Usuń</button>
             </div>
             <div class="col">
@@ -55,7 +55,8 @@
         <div class="form-row mt-2">
             <div class="col">
                 <button class="btn btn-dark mr-2" onclick="loadListFromStorage()">Wczytaj</button>
-                <button class="btn btn-dark" onclick="saveListToStorage()">Zapisz</button>
+                <button class="btn btn-dark mr-2" onclick="saveListToStorage()">Zapisz</button>
+                <button class="btn btn-dark" onclick="exportToFile()">Eksportuj do pliku</button>
             </div>
         </div>
         <div class="form-row mt-2 mb-2">
@@ -63,7 +64,7 @@
                 <input type="file" class="form-control-file" id="file-selector" accept=".zakupy" />
             </div>
             <div class="col-4">
-                <button class="btn btn-dark" onclick="loadFromFile()">Wczytaj z pliku</button>
+                <button class="btn btn-dark" onclick="loadFromFile()">Importuj z pliku</button>
             </div>
         </div>
     </div>

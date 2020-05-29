@@ -27,6 +27,27 @@ function loadFromFile() {
 function saveListToStorage() {
     localStorage.setItem("list", JSON.stringify(selectedProductList));
 }
+function showAddProductForm() {
+    document.getElementById('removeProduct').classList.add('d-none');
+    document.getElementById('add-product-form').classList.toggle('d-none');
+}
+function destroyClickedElement(event) {
+    document.body.removeChild(event.target);
+}
+function exportToFile() {
+    var textToSave = localStorage.getItem('list');
+    var textToSaveAsBlob = new Blob([textToSave], { type: "text/plain" });
+    var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+    var fileNameToSaveAs = 'zakupy.zakupy';
+    var downloadLink = document.createElement("a");
+    downloadLink.download = fileNameToSaveAs;
+    downloadLink.innerHTML = "Download File";
+    downloadLink.href = textToSaveAsURL;
+    downloadLink.onclick = destroyClickedElement;
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+}
 function loadListFromStorage() {
     selectedProductList = JSON.parse(localStorage.getItem("list"));
     renderProductList();
@@ -58,6 +79,7 @@ function edit(id) {
     categorySelect.value = product.category;
     var productForm = document.getElementById('add-product-form');
     productForm.classList.remove('d-none');
+    document.getElementById('removeProduct').classList.remove('d-none');
     productForm.setAttribute('data-selected-id', id);
 }
 function groupProductsByCategory(products) {
@@ -121,6 +143,7 @@ window.onload = function () {
             removeProductFromList();
             productForm.removeAttribute('data-selected-id');
             productForm.classList.add('d-none');
+            document.getElementById('removeProduct').classList.add('d-none');
         }
         var selectedProduct = {
             id: selectedId ? selectedId : app.generateId(),
