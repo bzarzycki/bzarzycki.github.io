@@ -38,7 +38,12 @@ function exportToFile() {
     var textToSave = localStorage.getItem('list');
     var textToSaveAsBlob = new Blob([textToSave], { type: "text/plain" });
     var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
-    var fileNameToSaveAs = 'zakupy.zakupy';
+    var fileName = document.getElementById('input-file-name').value;
+    var fileNameToSaveAs = 'zakupy';
+    if (!fileName) {
+        fileName = 'zakupy';
+    }
+    fileNameToSaveAs = fileName + '.zakupy';
     var downloadLink = document.createElement("a");
     downloadLink.download = fileNameToSaveAs;
     downloadLink.innerHTML = "Download File";

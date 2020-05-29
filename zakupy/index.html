@@ -53,18 +53,19 @@
     </div>
     <div class="container-fluid fixed-bottom bg-warning d-none" id="data-form">
         <div class="form-row mt-2">
-            <div class="col">
-                <button class="btn btn-dark mr-2" onclick="loadListFromStorage()">Wczytaj</button>
-                <button class="btn btn-dark mr-2" onclick="saveListToStorage()">Zapisz</button>
-                <button class="btn btn-dark" onclick="exportToFile()">Eksportuj do pliku</button>
-            </div>
-        </div>
-        <div class="form-row mt-2 mb-2">
             <div class="col-8">
                 <input type="file" class="form-control-file" id="file-selector" accept=".zakupy" />
             </div>
             <div class="col-4">
-                <button class="btn btn-dark" onclick="loadFromFile()">Importuj z pliku</button>
+                <button class="btn btn-dark btn-block"" onclick="loadFromFile()">Importuj</button>
+            </div>
+        </div>
+        <div class="form-row mt-2 mb-2">
+            <div class="col-8">
+                <input type="text" class="form-control" id="input-file-name" placeholder="Nazwa pliku" />
+            </div>
+            <div class="col-4">
+                <button class="btn btn-dark btn-block" onclick="exportToFile()">Eksportuj</button>
             </div>
         </div>
     </div>
